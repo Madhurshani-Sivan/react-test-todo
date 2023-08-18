@@ -1,3 +1,4 @@
+import TodoItem from "./TodoItem";
 import styles from "./TodoList.module.css";
 
 const TodoList = ({ todos }) => {
@@ -6,7 +7,7 @@ const TodoList = ({ todos }) => {
       <h2>Todo List</h2>
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id}>{todo.title}</li>
+          <TodoItem key={todo.id} title={todo.title} />
         ))}
       </ul>
     </div>

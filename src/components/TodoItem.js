@@ -6,7 +6,7 @@ const TodoItem = ({ title }) => {
     <div className={styles.todoItemContainer}>
       <div className={styles.todoItem}>
         <input type="radio" className={styles.doneCheckbox} />
-        {title}
+        <p className={styles.todoTitle}>{title}</p>
         <button className={styles.deleteButton}>
           <FaTrash />
         </button>

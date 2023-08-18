@@ -6,7 +6,6 @@ const TodoList = ({ todos }) => {
   return (
     <div className={styles.todoList}>
       <button className={styles.addButton}>
-        {" "}
         Add New <FaPlus className={styles.addIcon} />
       </button>
       <h2>Todo List</h2>

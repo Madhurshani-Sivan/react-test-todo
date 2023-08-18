@@ -6,7 +6,7 @@
 }
 
 .header {
-  background-color: #0D0D0D;
+  background-color: black;
   color: white;
   padding: 20px;
   display: flex;
@@ -21,6 +21,7 @@
 }
 
 .main {
+  background-color: #0D0D0D;
   flex: 1;
   padding: 20px;
 }

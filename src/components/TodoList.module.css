@@ -1,0 +1,20 @@
+.todoList{
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: black;
+    color: #4EA8DE;
+
+}
+
+.todoList h2{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.todoList ul{
+    list-style: none;
+    padding: 0;
+}
+

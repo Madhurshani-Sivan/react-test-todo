@@ -1,6 +1,8 @@
+import styles from "./TodoList.module.css";
+
 const TodoList = ({ todos }) => {
   return (
-    <div>
+    <div className={styles.todoList}>
       <h2>Todo List</h2>
       <ul>
         {todos.map((todo) => (

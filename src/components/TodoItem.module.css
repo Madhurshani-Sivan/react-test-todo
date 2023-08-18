@@ -1,0 +1,28 @@
+.todoItemContainer{
+    margin-bottom: 8px;
+}
+
+.todoItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.doneCheckbox {
+  margin-right: 6px;
+}
+
+.deleteButton {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #4ea8de;
+  cursor: pointer;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.deleteButton:hover {
+  color: 357da6;
+}

@@ -1,10 +1,16 @@
 import "./App.css";
 import Layout from "./components/Layout";
+import TodoList from "./components/TodoList";
 
 function App() {
+  const todos = [
+    { id: 1, title: "Study React" },
+    { id: 2, title: "Complete Assignment" },
+  ];
+
   return (
     <Layout>
-      <h3>Todo List</h3>
+      <TodoList todos={todos} />
     </Layout>
   );
 }

@@ -11,7 +11,7 @@ export const TaskProvider = ({ children }) => {
 
   useEffect(() => {
     const apiKey = "1j9carA1jwm3R6T7-Ju832Ff-9grjINo-jwGSItRO6ewtjjoTA";
-    const apiUrl = "https://crudapi.co.uk/api/v1/task";
+    const apiUrl = "/api/v1/task";
 
     const fetchData = async () => {
       try {

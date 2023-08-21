@@ -1,14 +1,29 @@
+import { useState } from "react";
 import { useTaskContext } from "../context/TaskContext";
 import TodoItem from "./TodoItem";
 import styles from "./TodoList.module.css";
 import { FaFileAlt, FaPlus, FaSpinner } from "react-icons/fa";
+import AddTaskModal from "./AddTaskModal";
 
 const TodoList = () => {
   const { tasks, isLoading } = useTaskContext();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSubmit = (title) => {
+    console.log(title);
+  };
 
   return (
     <div className={styles.todoList}>
-      <button className={styles.addButton}>
+      <button className={styles.addButton} onClick={openModal}>
         Add New <FaPlus className={styles.addIcon} />
       </button>
       <h2>Todo List</h2>
@@ -26,6 +41,9 @@ const TodoList = () => {
           tasks.map((todo) => <TodoItem key={todo.id} title={todo.title} />)
         )}
       </ul>
+      {isModalOpen && (
+        <AddTaskModal onClose={closeModal} onSubmit={handleSubmit} />
+      )}
     </div>
   );
 };

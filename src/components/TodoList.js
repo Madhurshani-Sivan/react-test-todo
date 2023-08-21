@@ -1,8 +1,11 @@
+import { useTaskContext } from "../context/TaskContext";
 import TodoItem from "./TodoItem";
 import styles from "./TodoList.module.css";
-import { FaPlus } from "react-icons/fa";
+import { FaFileAlt, FaPlus } from "react-icons/fa";
 
-const TodoList = ({ todos }) => {
+const TodoList = () => {
+  const { tasks } = useTaskContext();
+
   return (
     <div className={styles.todoList}>
       <button className={styles.addButton}>
@@ -10,9 +13,14 @@ const TodoList = ({ todos }) => {
       </button>
       <h2>Todo List</h2>
       <ul>
-        {todos.map((todo) => (
-          <TodoItem key={todo.id} title={todo.title} />
-        ))}
+        {tasks.length === 0 || tasks === undefined ? (
+          <div className={styles.noData}>
+            <FaFileAlt className={styles.icon} />
+            <p>No Data</p>
+          </div>
+        ) : (
+          tasks.map((todo) => <TodoItem key={todo.id} title={todo.title} />)
+        )}
       </ul>
     </div>
   );

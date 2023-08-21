@@ -21,7 +21,9 @@ export const TaskProvider = ({ children }) => {
           headers: { Authorization: `Bearer ${apiKey}` },
         });
 
-        setTasks(response.data);
+        if (Array.isArray(response.data)) {
+          setTasks(response.data);
+        }
         setIsLoading(false);
       } catch (error) {
         console.error("Failed to fetch data:", error);

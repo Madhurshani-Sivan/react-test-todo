@@ -17,7 +17,7 @@ const TodoList = () => {
           <div className={styles.loading}>
             <FaSpinner className={styles.spinner} />
           </div>
-        ) : tasks.length === 0 || tasks === undefined ? (
+        ) : !tasks || tasks.length === 0 ? (
           <div className={styles.noData}>
             <FaFileAlt className={styles.icon} />
             <p>No Data</p>

@@ -1,7 +1,10 @@
 import { useState } from "react";
 import styles from "./AddTaskModal.module.css";
+import { useTaskContext } from "../context/TaskContext";
 
-const AddTaskModal = ({ onClose, onSubmit }) => {
+const AddTaskModal = ({ onClose }) => {
+  const { addNewTask } = useTaskContext();
+
   const [title, setTitle] = useState("");
 
   const handleTitleChange = (event) => {
@@ -10,7 +13,7 @@ const AddTaskModal = ({ onClose, onSubmit }) => {
 
   const handleSubmit = () => {
     if (title.trim() !== "") {
-      onSubmit(title);
+      addNewTask(title);
       onClose();
     }
   };

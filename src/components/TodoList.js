@@ -17,10 +17,6 @@ const TodoList = () => {
     setIsModalOpen(false);
   };
 
-  const handleSubmit = (title) => {
-    console.log(title);
-  };
-
   return (
     <div className={styles.todoList}>
       <button className={styles.addButton} onClick={openModal}>
@@ -41,9 +37,7 @@ const TodoList = () => {
           tasks.map((todo) => <TodoItem key={todo.id} title={todo.title} />)
         )}
       </ul>
-      {isModalOpen && (
-        <AddTaskModal onClose={closeModal} onSubmit={handleSubmit} />
-      )}
+      {isModalOpen && <AddTaskModal onClose={closeModal} />}
     </div>
   );
 };

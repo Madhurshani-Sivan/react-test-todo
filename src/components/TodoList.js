@@ -1,10 +1,10 @@
 import { useTaskContext } from "../context/TaskContext";
 import TodoItem from "./TodoItem";
 import styles from "./TodoList.module.css";
-import { FaFileAlt, FaPlus } from "react-icons/fa";
+import { FaFileAlt, FaPlus, FaSpinner } from "react-icons/fa";
 
 const TodoList = () => {
-  const { tasks } = useTaskContext();
+  const { tasks, isLoading } = useTaskContext();
 
   return (
     <div className={styles.todoList}>
@@ -13,7 +13,11 @@ const TodoList = () => {
       </button>
       <h2>Todo List</h2>
       <ul>
-        {tasks.length === 0 || tasks === undefined ? (
+        {isLoading ? (
+          <div className={styles.loading}>
+            <FaSpinner className={styles.spinner} />
+          </div>
+        ) : tasks.length === 0 || tasks === undefined ? (
           <div className={styles.noData}>
             <FaFileAlt className={styles.icon} />
             <p>No Data</p>

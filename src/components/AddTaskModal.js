@@ -19,7 +19,12 @@ const AddTaskModal = ({ onClose, onSubmit }) => {
     <div className={styles.modal}>
       <div className={styles.modalContent}>
         <h2>Add New Item</h2>
-        <input type="text" value={title} onChange={handleTitleChange} />
+        <input
+          type="text"
+          id="title"
+          value={title}
+          onChange={handleTitleChange}
+        />
         <button onClick={onClose}>CANCEL</button>
         <button onClick={handleSubmit}>CONFIRM</button>
       </div>

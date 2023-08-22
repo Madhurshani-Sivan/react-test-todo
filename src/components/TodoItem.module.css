@@ -19,6 +19,12 @@
   word-wrap: break-word;
 }
 
+.completed {
+  flex-grow: 1;
+  word-wrap: break-word;
+  text-decoration: line-through;
+}
+
 .doneCheckbox {
   margin-right: 10px;
 }

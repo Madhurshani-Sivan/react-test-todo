@@ -22,7 +22,9 @@ const TodoItem = ({ title, id, completed }) => {
           checked={completed}
           onChange={handleRadioClick}
         />
-        <p className={styles.todoTitle}>{title}</p>
+        <p className={!completed ? styles.todoTitle : styles.completed}>
+          {title}
+        </p>
         <button className={styles.deleteButton} onClick={handleDelete}>
           <FaTrash />
         </button>

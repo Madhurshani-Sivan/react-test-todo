@@ -34,7 +34,9 @@ const TodoList = () => {
             <p>No Data</p>
           </div>
         ) : (
-          tasks.map((todo) => <TodoItem key={todo.id} title={todo.title} />)
+          tasks.map((todo) => (
+            <TodoItem key={todo._uuid} id={todo._uuid} title={todo.title} />
+          ))
         )}
       </ul>
       {isModalOpen && <AddTaskModal onClose={closeModal} />}

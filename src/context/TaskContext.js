@@ -45,8 +45,19 @@ export const TaskProvider = ({ children }) => {
     }
   };
 
+  const deleteTask = async (id) => {
+    try {
+      await axios.delete(`${apiUrl}/${id}`, {
+        headers: { Authorization: `Bearer ${apiKey}` },
+      });
+      fetchTasks();
+    } catch (error) {
+      console.error("Failed to add new task:", error);
+    }
+  };
+
   return (
-    <TaskContext.Provider value={{ tasks, isLoading, addNewTask }}>
+    <TaskContext.Provider value={{ tasks, isLoading, addNewTask, deleteTask }}>
       {children}
     </TaskContext.Provider>
   );

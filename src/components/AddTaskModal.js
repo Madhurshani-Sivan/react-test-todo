@@ -6,13 +6,17 @@ const AddTaskModal = ({ onClose }) => {
   const { addNewTask } = useTaskContext();
 
   const [title, setTitle] = useState("");
+  const [validation, setValidation] = useState("");
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
+    setValidation("");
   };
 
   const handleSubmit = () => {
-    if (title.trim() !== "") {
+    if (title.trim() === "") {
+      setValidation("Title cannont be empty");
+    } else {
       addNewTask(title);
       onClose();
     }
@@ -28,6 +32,7 @@ const AddTaskModal = ({ onClose }) => {
           value={title}
           onChange={handleTitleChange}
         />
+        {validation && <p className={styles.validationText}>{validation}</p>}
         <button onClick={onClose}>CANCEL</button>
         <button onClick={handleSubmit}>CONFIRM</button>
       </div>

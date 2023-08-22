@@ -10,8 +10,7 @@ const TodoItem = ({ title, id, completed }) => {
   };
 
   const handleRadioClick = () => {
-    completed = !completed;
-    updateTaskCompletion(id, completed);
+    updateTaskCompletion(id);
   };
 
   return (

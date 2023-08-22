@@ -56,10 +56,19 @@ export const TaskProvider = ({ children }) => {
     }
   };
 
-  const updateTaskCompletion = async (id, completed) => {
-    const updatedTask = { completed };
-
-    console.log(updatedTask);
+  const updateTaskCompletion = async (id) => {
+    try {
+      await axios.put(
+        `${apiUrl}/${id}`,
+        { completed: true },
+        {
+          headers: { Authorization: `Bearer ${apiKey}` },
+        }
+      );
+      fetchTasks();
+    } catch (error) {
+      console.error("Failed to update task:", error);
+    }
   };
 
   return (

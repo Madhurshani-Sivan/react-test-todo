@@ -34,14 +34,16 @@ const TodoList = () => {
             <p>No Data</p>
           </div>
         ) : (
-          tasks.map((todo) => (
-            <TodoItem
-              key={todo._uuid}
-              id={todo._uuid}
-              title={todo.title}
-              completed={todo.completed}
-            />
-          ))
+          tasks
+            .sort((a, b) => (a.completed ? 1 : -1))
+            .map((todo) => (
+              <TodoItem
+                key={todo._uuid}
+                id={todo._uuid}
+                title={todo.title}
+                completed={todo.completed}
+              />
+            ))
         )}
       </ul>
       {isModalOpen && <AddTaskModal onClose={closeModal} />}

@@ -1,16 +1,23 @@
-import { FaTrash } from "react-icons/fa";
+import { FaSpinner, FaTrash } from "react-icons/fa";
 import styles from "./TodoItem.module.css";
 import { useTaskContext } from "../context/TaskContext";
+import { useState } from "react";
 
 const TodoItem = ({ title, id, completed }) => {
   const { deleteTask, updateTaskCompletion } = useTaskContext();
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
 
-  const handleDelete = () => {
-    deleteTask(id);
+  const handleDelete = async () => {
+    setIsDeleting(true);
+    await deleteTask(id);
+    setIsDeleting(false);
   };
 
-  const handleRadioClick = () => {
-    updateTaskCompletion(id);
+  const handleRadioClick = async () => {
+    setIsUpdating(true);
+    await updateTaskCompletion(id);
+    setIsUpdating(false);
   };
 
   return (
@@ -22,11 +29,19 @@ const TodoItem = ({ title, id, completed }) => {
           checked={completed}
           onChange={handleRadioClick}
         />
-        <p className={!completed ? styles.todoTitle : styles.completed}>
-          {title}
-        </p>
+        {isUpdating ? (
+          <FaSpinner className={styles.loadingIcon} />
+        ) : (
+          <p className={!completed ? styles.todoTitle : styles.completed}>
+            {title}
+          </p>
+        )}
         <button className={styles.deleteButton} onClick={handleDelete}>
-          <FaTrash />
+          {isDeleting ? (
+            <FaSpinner className={styles.loadingIcon} />
+          ) : (
+            <FaTrash />
+          )}
         </button>
       </div>
     </div>

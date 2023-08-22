@@ -7,17 +7,20 @@ const AddTaskModal = ({ onClose }) => {
 
   const [title, setTitle] = useState("");
   const [validation, setValidation] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
     setValidation("");
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (title.trim() === "") {
       setValidation("Title cannont be empty");
     } else {
-      addNewTask(title);
+      setIsLoading(true);
+      await addNewTask(title);
+      setIsLoading(false);
       onClose();
     }
   };
@@ -34,7 +37,9 @@ const AddTaskModal = ({ onClose }) => {
         />
         {validation && <p className={styles.validationText}>{validation}</p>}
         <button onClick={onClose}>CANCEL</button>
-        <button onClick={handleSubmit}>CONFIRM</button>
+        <button onClick={handleSubmit}>
+          {isLoading ? "ADDING..." : "CONFIRM"}
+        </button>
       </div>
     </div>
   );

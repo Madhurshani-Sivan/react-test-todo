@@ -7,7 +7,6 @@ export const useTaskContext = () => useContext(TaskContext);
 
 export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const apiKey = "1j9carA1jwm3R6T7-Ju832Ff-9grjINo-jwGSItRO6ewtjjoTA";
@@ -19,7 +18,6 @@ export const TaskProvider = ({ children }) => {
 
   const fetchTasks = async () => {
     try {
-      setIsLoading(true);
       setError(null);
 
       const response = await axios.get(apiUrl, {
@@ -27,11 +25,10 @@ export const TaskProvider = ({ children }) => {
       });
 
       setTasks(response.data.items);
-      setIsLoading(false);
     } catch (error) {
       console.error("Failed to fetch data:", error);
+
       setError("Failed to fetch tasks.");
-      setIsLoading(false);
     }
   };
 
@@ -39,30 +36,40 @@ export const TaskProvider = ({ children }) => {
     const newTask = { title, completed: false };
 
     try {
+      setError(null);
+
       await axios.post(apiUrl, [newTask], {
         headers: { Authorization: `Bearer ${apiKey}` },
       });
+
       fetchTasks();
     } catch (error) {
       console.error("Failed to add new task:", error);
+
       setError("Failed to add the new task.");
     }
   };
 
   const deleteTask = async (id) => {
     try {
+      setError(null);
+
       await axios.delete(`${apiUrl}/${id}`, {
         headers: { Authorization: `Bearer ${apiKey}` },
       });
+
       fetchTasks();
     } catch (error) {
       console.error("Failed to delete task:", error);
+
       setError("Failed to delete the task");
     }
   };
 
   const updateTaskCompletion = async (id) => {
     try {
+      setError(null);
+
       await axios.put(
         `${apiUrl}/${id}`,
         { completed: true },
@@ -70,9 +77,11 @@ export const TaskProvider = ({ children }) => {
           headers: { Authorization: `Bearer ${apiKey}` },
         }
       );
+
       fetchTasks();
     } catch (error) {
       console.error("Failed to update task:", error);
+
       setError("Failed to update the tasks.");
     }
   };
@@ -81,7 +90,6 @@ export const TaskProvider = ({ children }) => {
     <TaskContext.Provider
       value={{
         tasks,
-        isLoading,
         error,
         addNewTask,
         deleteTask,

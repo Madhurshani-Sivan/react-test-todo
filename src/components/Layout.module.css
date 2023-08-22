@@ -1,20 +1,26 @@
-.layout{
+.layout {
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 
-.header{
+.header {
   background-color: #1c1c1c;
   padding: 10px;
   text-align: center;
 }
 
-.header img{
+.header img {
   max-width: 100px;
 }
 
-.main{
+.main {
   flex-grow: 1;
   padding: 20px;
+}
+
+.errorText {
+  font-size: 14px;
+  color: red;
+  margin-left: 20px;
 }

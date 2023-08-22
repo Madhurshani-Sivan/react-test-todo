@@ -8,6 +8,7 @@ export const useTaskContext = () => useContext(TaskContext);
 export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const apiKey = "1j9carA1jwm3R6T7-Ju832Ff-9grjINo-jwGSItRO6ewtjjoTA";
   const apiUrl = "/api/v1/task";
@@ -19,6 +20,7 @@ export const TaskProvider = ({ children }) => {
   const fetchTasks = async () => {
     try {
       setIsLoading(true);
+      setError(null);
 
       const response = await axios.get(apiUrl, {
         headers: { Authorization: `Bearer ${apiKey}` },
@@ -28,6 +30,7 @@ export const TaskProvider = ({ children }) => {
       setIsLoading(false);
     } catch (error) {
       console.error("Failed to fetch data:", error);
+      setError("Failed to fetch tasks.");
       setIsLoading(false);
     }
   };
@@ -42,6 +45,7 @@ export const TaskProvider = ({ children }) => {
       fetchTasks();
     } catch (error) {
       console.error("Failed to add new task:", error);
+      setError("Failed to add the new task.");
     }
   };
 
@@ -53,6 +57,7 @@ export const TaskProvider = ({ children }) => {
       fetchTasks();
     } catch (error) {
       console.error("Failed to delete task:", error);
+      setError("Failed to delete the task");
     }
   };
 
@@ -68,12 +73,20 @@ export const TaskProvider = ({ children }) => {
       fetchTasks();
     } catch (error) {
       console.error("Failed to update task:", error);
+      setError("Failed to update the tasks.");
     }
   };
 
   return (
     <TaskContext.Provider
-      value={{ tasks, isLoading, addNewTask, deleteTask, updateTaskCompletion }}
+      value={{
+        tasks,
+        isLoading,
+        error,
+        addNewTask,
+        deleteTask,
+        updateTaskCompletion,
+      }}
     >
       {children}
     </TaskContext.Provider>

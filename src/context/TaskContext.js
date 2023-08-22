@@ -52,12 +52,20 @@ export const TaskProvider = ({ children }) => {
       });
       fetchTasks();
     } catch (error) {
-      console.error("Failed to add new task:", error);
+      console.error("Failed to delete task:", error);
     }
   };
 
+  const updateTaskCompletion = async (id, completed) => {
+    const updatedTask = { completed };
+
+    console.log(updatedTask);
+  };
+
   return (
-    <TaskContext.Provider value={{ tasks, isLoading, addNewTask, deleteTask }}>
+    <TaskContext.Provider
+      value={{ tasks, isLoading, addNewTask, deleteTask, updateTaskCompletion }}
+    >
       {children}
     </TaskContext.Provider>
   );

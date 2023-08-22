@@ -35,7 +35,12 @@ const TodoList = () => {
           </div>
         ) : (
           tasks.map((todo) => (
-            <TodoItem key={todo._uuid} id={todo._uuid} title={todo.title} />
+            <TodoItem
+              key={todo._uuid}
+              id={todo._uuid}
+              title={todo.title}
+              completed={todo.completed}
+            />
           ))
         )}
       </ul>

@@ -8,6 +8,7 @@ export const useTaskContext = () => useContext(TaskContext);
 export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const apiKey = "1j9carA1jwm3R6T7-Ju832Ff-9grjINo-jwGSItRO6ewtjjoTA";
   const apiUrl = "/api/v1/task";
@@ -19,16 +20,19 @@ export const TaskProvider = ({ children }) => {
   const fetchTasks = async () => {
     try {
       setError(null);
+      setIsLoading(true);
 
       const response = await axios.get(apiUrl, {
         headers: { Authorization: `Bearer ${apiKey}` },
       });
 
       setTasks(response.data.items);
+      setIsLoading(false);
     } catch (error) {
       console.error("Failed to fetch data:", error);
 
       setError("Failed to fetch tasks.");
+      setIsLoading(false);
     }
   };
 
@@ -91,6 +95,7 @@ export const TaskProvider = ({ children }) => {
       value={{
         tasks,
         error,
+        isLoading,
         addNewTask,
         deleteTask,
         updateTaskCompletion,

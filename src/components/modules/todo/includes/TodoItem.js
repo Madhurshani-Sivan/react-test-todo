@@ -1,21 +1,26 @@
+import { FaSpinner, FaTrash } from "react-icons/fa";
 import styles from "./TodoItem.module.css";
+import { useState } from "react";
+import { useTodoContext } from "../../../../context/providers/TodoContextProvider";
 
-const TodoItem = ({ title, completed }) => {
-  /* const { deleteTask, updateTaskCompletion } = useTaskContext();
-  const [isDeleting, setIsDeleting] = useState(false);
+const TodoItem = ({ title, id, completed }) => {
+  // const { deleteTask, updateTaskCompletion } = useTaskContext();
+  // const [isDeleting, setIsDeleting] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const handleDelete = async () => {
+  const [state, dispatchActions] = useTodoContext();
+
+  /* const handleDelete = async () => {
     setIsDeleting(true);
     await deleteTask(id);
     setIsDeleting(false);
-  };
-
-  const handleRadioClick = async () => {
-    setIsUpdating(true);
-    await updateTaskCompletion(id);
-    setIsUpdating(false);
   };*/
+
+  const editTodo = async () => {
+    setIsUpdating(true);
+    await dispatchActions.editTask(id);
+    setIsUpdating(false);
+  };
 
   return (
     <div className={styles.todoItemContainer}>
@@ -24,22 +29,21 @@ const TodoItem = ({ title, completed }) => {
           type="radio"
           className={styles.doneCheckbox}
           checked={completed}
-          //onChange={handleRadioClick}
+          onChange={editTodo}
         />
-        {/*  {isUpdating ? (
+        {isUpdating ? (
           <FaSpinner className={styles.loadingIcon} />
-        ) : ( */}
-        <p className={!completed ? styles.todoTitle : styles.completed}>
-          {title}
-        </p>
-        {/* )}
-        {  <button className={styles.deleteButton} onClick={handleDelete}>
-          {isDeleting ? (
+        ) : (
+          <p className={!completed ? styles.todoTitle : styles.completed}>
+            {title}
+          </p>
+        )}
+        {/* <button className={styles.deleteButton} onClick={handleDelete}>
+           {isDeleting ? (
             <FaSpinner className={styles.loadingIcon} />
-          ) : (
-            <FaTrash />
-          )}
-        </button> } */}
+          ) : ( 
+          <FaTrash />
+        </button> */}
       </div>
     </div>
   );

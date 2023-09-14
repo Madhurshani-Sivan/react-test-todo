@@ -1,9 +1,5 @@
 import { httpRequest } from "../../helpers/http";
-import {
-  editTodoListAPI,
-  getTodoListAPI,
-  removeTodoListAPI,
-} from "../../configs/api-end-points";
+import { getTodoListAPI } from "../../configs/api-end-points";
 import {
   pageLoaderStatusKey,
   refreshTodoDataKey,
@@ -40,7 +36,7 @@ const addNewTask = async (dispatch, body) => {
 
 const editTask = async (dispatch, id) => {
   try {
-    const response = await httpRequest(`${editTodoListAPI}/${id}`, "PUT", {
+    const response = await httpRequest(`${getTodoListAPI}/${id}`, "PUT", {
       completed: true,
     });
     dispatch({
@@ -53,7 +49,7 @@ const editTask = async (dispatch, id) => {
 
 const deleteTask = async (dispatch, id) => {
   try {
-    const response = await httpRequest(`${removeTodoListAPI}/${id}`, "DELETE");
+    const response = await httpRequest(`${getTodoListAPI}/${id}`, "DELETE");
     dispatch({
       type: refreshTodoDataKey,
     });

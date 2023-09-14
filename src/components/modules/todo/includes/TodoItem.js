@@ -5,16 +5,16 @@ import { useTodoContext } from "../../../../context/providers/TodoContextProvide
 
 const TodoItem = ({ title, id, completed }) => {
   // const { deleteTask, updateTaskCompletion } = useTaskContext();
-  // const [isDeleting, setIsDeleting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
 
   const [state, dispatchActions] = useTodoContext();
 
-  /* const handleDelete = async () => {
+  const handleDelete = async () => {
     setIsDeleting(true);
-    await deleteTask(id);
+    await dispatchActions.deleteTask(id);
     setIsDeleting(false);
-  };*/
+  };
 
   const editTodo = async () => {
     setIsUpdating(true);
@@ -38,12 +38,13 @@ const TodoItem = ({ title, id, completed }) => {
             {title}
           </p>
         )}
-        {/* <button className={styles.deleteButton} onClick={handleDelete}>
-           {isDeleting ? (
+        <button className={styles.deleteButton} onClick={handleDelete}>
+          {isDeleting ? (
             <FaSpinner className={styles.loadingIcon} />
-          ) : ( 
-          <FaTrash />
-        </button> */}
+          ) : (
+            <FaTrash />
+          )}
+        </button>
       </div>
     </div>
   );

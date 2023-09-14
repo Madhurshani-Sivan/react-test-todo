@@ -1,5 +1,9 @@
 import { httpRequest } from "../../helpers/http";
-import { editTodoListAPI, getTodoListAPI } from "../../configs/api-end-points";
+import {
+  editTodoListAPI,
+  getTodoListAPI,
+  removeTodoListAPI,
+} from "../../configs/api-end-points";
 import { addTodoDataKey, requestTodoDataKey } from "../../configs/action-keys";
 
 const fetchTasks = async (dispatch) => {
@@ -24,7 +28,6 @@ const addNewTask = async (dispatch, body) => {
 };
 
 const editTask = async (dispatch, id) => {
-  console.log(id);
   try {
     const response = await httpRequest(`${editTodoListAPI}/${id}`, "PUT", {
       completed: true,
@@ -34,11 +37,20 @@ const editTask = async (dispatch, id) => {
   }
 };
 
+const deleteTask = async (dispatch, id) => {
+  try {
+    const response = await httpRequest(`${removeTodoListAPI}/${id}`, "DELETE");
+  } catch (error) {
+    console.error("Failed to delete data:", error);
+  }
+};
+
 const todoActions = (dispatch) => {
   return {
     fetchTasks: () => fetchTasks(dispatch),
     addNewTask: (body) => addNewTask(dispatch, body),
-    editTask: (body) => editTask(dispatch, body),
+    editTask: (id) => editTask(dispatch, id),
+    deleteTask: (id) => deleteTask(dispatch, id),
   };
 };
 

@@ -1,10 +1,13 @@
 import { useState } from "react";
 import styles from "./AddTaskModal.module.css";
+import { useTodoContext } from "../../context/providers/TodoContextProvider";
 
 const AddTaskModal = ({ onClose }) => {
   const [title, setTitle] = useState("");
   const [validation, setValidation] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const [state, dispatchActions] = useTodoContext();
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -16,7 +19,7 @@ const AddTaskModal = ({ onClose }) => {
       setValidation("Title cannont be empty");
     } else {
       setIsLoading(true);
-      //  await addNewTask(title);
+      await dispatchActions.addNewTask([{ title: title, completed: false }]);
       setIsLoading(false);
       onClose();
     }

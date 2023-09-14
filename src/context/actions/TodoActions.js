@@ -1,6 +1,6 @@
 import { httpRequest } from "../../helpers/http";
 import { getTodoListAPI } from "../../configs/api-end-points";
-import { requestTodoDataKey } from "../../configs/action-keys";
+import { addTodoDataKey, requestTodoDataKey } from "../../configs/action-keys";
 
 const fetchTasks = async (dispatch) => {
   try {
@@ -14,9 +14,19 @@ const fetchTasks = async (dispatch) => {
   }
 };
 
+const addNewTask = async (dispatch, body) => {
+  console.log(body);
+  try {
+    const response = await httpRequest(getTodoListAPI, "POST", body);
+  } catch (error) {
+    console.error("Failed to Add data:", error);
+  }
+};
+
 const todoActions = (dispatch) => {
   return {
     fetchTasks: () => fetchTasks(dispatch),
+    addNewTask: (body) => addNewTask(dispatch, body),
   };
 };
 

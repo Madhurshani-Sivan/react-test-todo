@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useTodoContext } from "../../../../context/providers/TodoContextProvider";
 
 const TodoItem = ({ title, id, completed }) => {
-  // const { deleteTask, updateTaskCompletion } = useTaskContext();
   const [isDeleting, setIsDeleting] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
 

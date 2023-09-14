@@ -4,7 +4,7 @@ import {
   getTodoListAPI,
   removeTodoListAPI,
 } from "../../configs/api-end-points";
-import { addTodoDataKey, requestTodoDataKey } from "../../configs/action-keys";
+import { requestTodoDataKey } from "../../configs/action-keys";
 
 const fetchTasks = async (dispatch) => {
   try {

@@ -21,29 +21,23 @@ const TodoList = ({ tasks }) => {
         Add New <FaPlus className={styles.addIcon} />
       </button>
       <ul>
-        {
-          /*  {isLoading ? (
-          <div className={styles.loading}>
-            <FaSpinner className={styles.spinner} />
+        {!tasks || tasks.length === 0 ? (
+          <div className={styles.noData}>
+            <FaFileAlt className={styles.icon} />
+            <p>No Data</p>
           </div>
-        ) : */ !tasks || tasks.length === 0 ? (
-            <div className={styles.noData}>
-              <FaFileAlt className={styles.icon} />
-              <p>No Data</p>
-            </div>
-          ) : (
-            tasks
-              .sort((a, b) => (a.completed ? 1 : -1))
-              .map((todo) => (
-                <TodoItem
-                  key={todo._uuid}
-                  id={todo._uuid}
-                  title={todo.title}
-                  completed={todo.completed}
-                />
-              ))
-          )
-        }
+        ) : (
+          tasks
+            .sort((a, b) => (a.completed ? 1 : -1))
+            .map((todo) => (
+              <TodoItem
+                key={todo._uuid}
+                id={todo._uuid}
+                title={todo.title}
+                completed={todo.completed}
+              />
+            ))
+        )}
       </ul>
       {isModalOpen && <AddTaskModal onClose={closeModal} />}
     </div>

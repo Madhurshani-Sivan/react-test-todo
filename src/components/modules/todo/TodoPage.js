@@ -7,12 +7,12 @@ const TodoPage = () => {
 
   useEffect(() => {
     dispatchActions.fetchTasks();
-  }, []);
+  }, [state.refreshState]);
 
   return (
     <div>
       <h1>Todo List</h1>
-      <TodoList tasks={state.tasks} />
+      <TodoList tasks={state.tasks} isLoading={state.isLoading} />
     </div>
   );
 };

@@ -1,8 +1,12 @@
 import { createContext, useContext, useReducer } from "react";
-import { addTodoDataKey, requestTodoDataKey } from "../../configs/action-keys";
+import {
+  pageLoaderStatusKey,
+  refreshTodoDataKey,
+  requestTodoDataKey,
+} from "../../configs/action-keys";
 import { todoActions } from "../actions/TodoActions";
 
-const intialState = { tasks: [] };
+const intialState = { tasks: [], refreshState: false, isLoading: false };
 
 const TodoContext = createContext({});
 
@@ -12,6 +16,11 @@ const todoReducer = (state, action) => {
   switch (action.type) {
     case requestTodoDataKey:
       return { ...state, tasks: action.payload };
+    case refreshTodoDataKey:
+      return { ...state, refreshState: !state.refreshState };
+    case pageLoaderStatusKey:
+      return { ...state, isLoading: action.payload };
+
     default:
       return state;
   }

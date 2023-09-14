@@ -4,16 +4,24 @@ import {
   getTodoListAPI,
   removeTodoListAPI,
 } from "../../configs/api-end-points";
-import { requestTodoDataKey } from "../../configs/action-keys";
+import {
+  pageLoaderStatusKey,
+  refreshTodoDataKey,
+  requestTodoDataKey,
+} from "../../configs/action-keys";
 
 const fetchTasks = async (dispatch) => {
+  dispatch({ type: pageLoaderStatusKey, payload: true });
+
   try {
     const response = await httpRequest(getTodoListAPI);
+    dispatch({ type: pageLoaderStatusKey, payload: false });
 
     dispatch({ type: requestTodoDataKey, payload: response.items });
   } catch (error) {
-    console.error("Failed to fetch data:", error);
+    dispatch({ type: pageLoaderStatusKey, payload: false });
 
+    console.error("Failed to fetch data:", error);
     dispatch({ type: requestTodoDataKey, payload: [] });
   }
 };
@@ -22,6 +30,9 @@ const addNewTask = async (dispatch, body) => {
   console.log(body);
   try {
     const response = await httpRequest(getTodoListAPI, "POST", body);
+    dispatch({
+      type: refreshTodoDataKey,
+    });
   } catch (error) {
     console.error("Failed to add data:", error);
   }
@@ -32,6 +43,9 @@ const editTask = async (dispatch, id) => {
     const response = await httpRequest(`${editTodoListAPI}/${id}`, "PUT", {
       completed: true,
     });
+    dispatch({
+      type: refreshTodoDataKey,
+    });
   } catch (error) {
     console.error("Failed to edit data:", error);
   }
@@ -40,6 +54,9 @@ const editTask = async (dispatch, id) => {
 const deleteTask = async (dispatch, id) => {
   try {
     const response = await httpRequest(`${removeTodoListAPI}/${id}`, "DELETE");
+    dispatch({
+      type: refreshTodoDataKey,
+    });
   } catch (error) {
     console.error("Failed to delete data:", error);
   }

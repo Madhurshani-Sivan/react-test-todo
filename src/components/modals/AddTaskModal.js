@@ -1,10 +1,7 @@
 import { useState } from "react";
 import styles from "./AddTaskModal.module.css";
-import { useTaskContext } from "../context/TaskContext";
 
 const AddTaskModal = ({ onClose }) => {
-  const { addNewTask } = useTaskContext();
-
   const [title, setTitle] = useState("");
   const [validation, setValidation] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -19,7 +16,7 @@ const AddTaskModal = ({ onClose }) => {
       setValidation("Title cannont be empty");
     } else {
       setIsLoading(true);
-      await addNewTask(title);
+      //  await addNewTask(title);
       setIsLoading(false);
       onClose();
     }

@@ -1,11 +1,35 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
+import { createContext, useContext, useReducer } from "react";
+import { requestTodoDataKey } from "../../configs/action-keys";
+import { todoActions } from "../actions/TodoActions";
 
-const TaskContext = createContext();
+const intialState = { tasks: [] };
 
-export const useTaskContext = () => useContext(TaskContext);
+const TodoContext = createContext({});
 
-export const TaskProvider = ({ children }) => {
+const useTodoContext = () => useContext(TodoContext);
+
+const todoReducer = (state, action) => {
+  switch (action.type) {
+    case requestTodoDataKey:
+      return { ...state, tasks: action.payload };
+    default:
+      return state;
+  }
+};
+
+const TodoContextProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(todoReducer, intialState);
+  const dispatchActions = todoActions(dispatch);
+  return (
+    <TodoContext.Provider value={[state, dispatchActions]}>
+      {children}
+    </TodoContext.Provider>
+  );
+};
+
+export { TodoContext, TodoContextProvider, useTodoContext };
+
+/* export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -104,4 +128,4 @@ export const TaskProvider = ({ children }) => {
       {children}
     </TaskContext.Provider>
   );
-};
+}; */
